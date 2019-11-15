@@ -17,10 +17,32 @@ import java.io.Serializable;
 @SessionScoped
 public class Login implements Serializable {
 
+    private String nombre;
+    private String contrasena;
+
     /**
-     * Creates a new instance of Login
+     * Creates a new instance of login
      */
     public Login() {
     }
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public void iniciarSesion() {
+
+    }
 }
