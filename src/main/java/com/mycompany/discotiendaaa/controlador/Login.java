@@ -5,9 +5,16 @@
  */
 package com.mycompany.discotiendaaa.controlador;
 
+import com.mycompany.discotiendaaa.logica.Sesion;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -42,7 +49,35 @@ public class Login implements Serializable {
         this.contrasena = contrasena;
     }
 
-    public void iniciarSesion() {
-
+    public String iniciarSesion() {
+        String redireccion = null;
+        Sesion sesion = new Sesion();
+        boolean validacion = sesion.validarSesion(nombre, contrasena);
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (validacion == true) {
+            context.getExternalContext().getSessionMap().put("usuario", nombre);
+            redireccion = "/admin/principalAdmin.xhtml";
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Acceso denegado", "Usuario y/o contraseña incorrecta"));
+        }
+        return redireccion;
+    }
+    
+    public void validarPermiso() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
+        String usuarioLogin = (String) context.getExternalContext().getSessionMap().get("usuario");
+        if (!req.getRequestURI().contains("./faces/login.xhtml")) {
+            if (req.getRequestURI().contains("/admin/")) {
+                if (usuarioLogin == null) {
+                    try {
+                        context.getExternalContext().redirect("./../login.xhtml");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
     }
 }

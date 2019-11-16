@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <h:form>
+            <div id="top">
+                <ui:insert name="top">
+                    <h:panelGrid id="grid" columns="3" cellspacing="5" cellpadding="10" style="margin: auto;">
+                        <h:outputLabel  value="#{msg.titulo}" /> 
+                        <h:outputLabel  value="#{msg.idioma}" />  
+                        <h:selectOneMenu value="#{inter.idioma}" 
+                                         onchange="submit()"                                 
+                                         valueChangeListener="#{inter.cambioIdioma}">
+                            <f:selectItems value="#{inter.listaIdiomas}"  />                    
+                        </h:selectOneMenu>    
+                    </h:panelGrid>                 
+                </ui:insert>
+            </div>
+        </h:form>
+        <div>
+            <h:form>
+                <div id="left">
+                    <ui:insert name="left">
+                        <p:commandButton id="btnCancion" actionListener="#{principal.irCancion()}" update="centro" value="#{msg.comprarCancion}" style="margin-left:45%;"/>                        
+                        <br></br>
+                        <p:commandButton id="btnDisco" actionListener="#{principal.irDisco()}" update="centro" value="#{msg.comprarDisco}" style="margin-left:45%;"/>
+                        <br></br>
+                        <p:commandButton id="btnInicioSesion" actionListener="#{principal.irLogin()}" update="centro" value="#{msg.login}" style="margin-left:45%;"/>
+                    </ui:insert>
+                </div>
+            </h:form>
+            <div id="content" class="left_content">
+                 <h:panelGroup id="centro" layout="block" >
+                    <ui:insert name="content">
+                        <ui:include src="#{principal.pagina}"/>
+                    </ui:insert>
+                </h:panelGroup>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

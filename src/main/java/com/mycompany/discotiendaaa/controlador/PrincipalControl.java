@@ -16,13 +16,22 @@ import java.io.Serializable;
 @Named(value = "principalControl")
 @SessionScoped
 public class PrincipalControl implements Serializable {
-    private String seleccion="artista.xhtml";
-    
+
+    private String seleccion = "artista.xhtml";
+
     public PrincipalControl() {
     }
-    
-    public void irCancion(){
-        seleccion="cancion.xhtml";
+
+    public void irCancion() {
+        seleccion = "cancion.xhtml";
+    }
+
+    public void irArtista() {
+        seleccion = "artista.xhtml";
+    }
+
+    public void irDisco() {
+        seleccion = "disco.xhtml";
     }
 
     public String getSeleccion() {
@@ -32,5 +41,5 @@ public class PrincipalControl implements Serializable {
     public void setSeleccion(String seleccion) {
         this.seleccion = seleccion;
     }
-    
+
 }

@@ -8,27 +8,30 @@
         <title>Facelet Title</title>
     </h:head>
      <h:body>
+         <h:panelGroup layout="block" style="text-align: center;">
+            <h1><p:outputLabel  value="#{msg.disco}"/></h1>
+        </h:panelGroup>
         <h:form enctype="multipart/form-data">
             <h:panelGroup id="p" layout="block" style="border: 2px solid black; width: 40%; padding: 1%; margin: auto; margin-top: 5%; background-color: white; border-radius: 2%;">
                 <h:panelGrid id="grid" columns="3" cellspacing="5" cellpadding="10" style="margin: auto;">
 
-                    <p:outputLabel  value="Nombre"/>
+                    <p:outputLabel  value="#{msg.nombre}"/>
                     <p:inputText id="nom" value="#{crearDiscoControl.nombre}"  style="width:95% "></p:inputText>
                     <p:message for="nom"/>
 
-                    <p:outputLabel  value="Caratula"/>
+                    <p:outputLabel  value="#{msg.caratula}"/>
                     <p:fileUpload value="#{crearDiscoControl.file}" mode="simple" />
                     <h:outputLabel/>
 
-                    <p:outputLabel  value="Artista"/>
+                    <p:outputLabel  value="#{msg.artista}"/>
                     <p:selectOneMenu id="ar" value="#{crearDiscoControl.artista}" style="width:90%">
-                        <f:selectItem itemLabel="Selecciona" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItem itemLabel="#{msg.selecciona}" itemValue="#{null}" noSelectionOption="true" />
                         <f:selectItems value="#{crearDiscoControl.artistaNombre}"/>  
                     </p:selectOneMenu>
                     <p:message for="ar"/>
                 </h:panelGrid>
                 <br></br>
-                <p:commandButton value="Crear" ajax="false" action="#{crearDiscoControl.crearDisco}" style="margin-left:45%; width: 30%;"/>
+                <p:commandButton value="#{msg.crear}" ajax="false" action="#{crearDiscoControl.crearDisco}" style="margin-left:45%; width: 30%;"/>
                 <p:growl id="messages" showDetail="true" />
             </h:panelGroup>
 

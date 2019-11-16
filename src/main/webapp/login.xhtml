@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <h:panelGroup layout="block" style="text-align: center;">
-            <h1>INICIAR SESIÓN</h1>
+            <h1>#{msg.login}</h1>
         </h:panelGroup>
         <h:form>
             <h:panelGroup layout="block" >
@@ -17,12 +17,13 @@
                     <p:inputText id="nom" value="#{login.nombre}" required="true" style="width:95% "></p:inputText>
                     <p:message for="nom"/>
                     <p:outputLabel value="#{msg.contrasena}"/>
-                    <p:inputText id="contra" value="#{login.contrasena}" required="true" style="width:95% "></p:inputText>
+                    <p:password id="contra" value="#{login.contrasena}" required="true" style="width:95% "></p:password>
                     <p:message for="contra"/>
                 </h:panelGrid>
                 <br></br>
-                <p:commandButton id="add" value="#{msg.ingresar}" actionListener="#{login.iniciarSesion()}" style="margin-left:45%; width: 10%;"/>
-
+                <center><p:messages id="msgs" showDetail="true" /></center>
+                <br></br>
+                <p:commandButton id="add" value="#{msg.ingresar}" ajax="false" action="#{login.iniciarSesion()}" style="margin-left:45%;"/>
             </h:panelGroup>
         </h:form> 
     </h:body>

@@ -8,32 +8,35 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <h:panelGroup layout="block" style="text-align: center;">
+            <h1><p:outputLabel  value="#{msg.cancion}"/></h1>
+        </h:panelGroup>
         <h:form>
             <h:panelGroup id="pan" layout="block" style="border: 2px solid black; width: 40%; padding: 1%; margin: auto; margin-top: 5%; background-color: white; border-radius: 2%;">
                 <h:panelGrid id="grid" columns="3" cellspacing="5" cellpadding="10" style="margin: auto;">
 
-                    <p:outputLabel  value="Nombre"/>
+                    <p:outputLabel  value="#{msg.nombre}"/>
                     <p:inputText id="nom" value="#{crearCancionControl.nombre}" required="true" label="Nombre*" style="width:95% "></p:inputText>
                     <p:message for="nom"/>
 
-                    <p:outputLabel  value="Duración"/>
+                    <p:outputLabel  value="#{msg.duracion}"/>
                     <p:inputText id="dur" value="#{crearCancionControl.duracion}" required="true" label="Duracion*" style="width:95% " type="number"></p:inputText>
                     <p:message for="dur"/>
 
-                    <p:outputLabel  value="Disco"/>
+                    <p:outputLabel  value="#{msg.disco}"/>
                     <p:selectOneMenu id="disco" value="#{crearCancionControl.disco}" style="width:90%">
-                        <f:selectItem itemLabel="Selecciona" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItem itemLabel="#{msg.selecciona}" itemValue="#{null}" noSelectionOption="true" />
                         <f:selectItems value="#{crearCancionControl.nombreDiscos}"/>  
                     </p:selectOneMenu>
                     <p:message for="disco"/>
 
-                    <p:outputLabel  value="Precio"/>
+                    <p:outputLabel  value="#{msg.precio}"/>
                     <p:inputText id="precio" value="#{crearCancionControl.precio}" required="true" label="Precio*" style="width:95% "></p:inputText>
                     <p:message for="precio"/>
 
                 </h:panelGrid>
                 <br></br>
-                <p:commandButton id="add" actionListener="#{crearCancionControl.crearCancion()}" update="pan" value="Agregar" style="margin-left:45%; width: 30%;"/>
+                <p:commandButton id="add" actionListener="#{crearCancionControl.crearCancion()}" update="pan" value="#{msg.agregar}" style="margin-left:45%; width: 30%;"/>
 
             </h:panelGroup>
         </h:form>
