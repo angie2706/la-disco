@@ -12,6 +12,7 @@ import com.mycompany.discotiendaaa.pojo.Admin;
  * @author familia manrique
  */
 public class Sesion {
+
     public boolean validarSesion(String usuario, String contrasena) {
         if ("juanita123".equals(usuario) && "Holiwi".equals(contrasena)) {
             return true;

@@ -5,7 +5,10 @@
  */
 package com.mycompany.discotiendaaa.controlador;
 
+import com.mycompany.discotiendaaa.modelo.CancionDB;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 
@@ -15,15 +18,15 @@ import javax.enterprise.context.SessionScoped;
  */
 @Named(value = "principal")
 @SessionScoped
-public class Principal implements Serializable{
+public class Principal implements Serializable {
 
     /**
      * Creates a new instance of Principal
      */
-    
     private String pagina = "/usuario/comprarCancion.xhtml";
 
     public Principal() {
+        
     }
 
     public void irCancion() {
@@ -46,5 +49,6 @@ public class Principal implements Serializable{
         this.pagina = pagina;
     }
 
-    
+   
+
 }

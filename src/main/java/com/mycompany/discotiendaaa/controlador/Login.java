@@ -6,6 +6,7 @@
 package com.mycompany.discotiendaaa.controlador;
 
 import com.mycompany.discotiendaaa.logica.Sesion;
+import com.mycompany.discotiendaaa.modelo.CancionDB;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
