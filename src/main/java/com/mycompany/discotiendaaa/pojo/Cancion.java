@@ -11,20 +11,36 @@ package com.mycompany.discotiendaaa.pojo;
  */
 public class Cancion {
 
-    private int id_cancion;
     private String nombre;
     private String duracion;
     private int id_disco;
-    private double precio;
+    private String nombre_disco;
+    private float precio;
 
-    public int getId_cancion() {
-        return id_cancion;
+
+     public Cancion(String nombre, String duracion, String nombre_disco, float precio) {
+        this.nombre = nombre;
+        this.duracion = duracion;
+        this.nombre_disco = nombre_disco;
+        this.precio = precio;
+    }
+      
+    public int getId_disco() {
+        return id_disco;
     }
 
-    public void setId_cancion(int id_cancion) {
-        this.id_cancion = id_cancion;
+    public void setId_disco(int id_disco) {
+        this.id_disco = id_disco;
     }
 
+    public String getNombre_disco() {
+        return nombre_disco;
+    }
+
+    public void setNombre_disco(String nombre_disco) {
+        this.nombre_disco = nombre_disco;
+    }
+       
     public String getNombre() {
         return nombre;
     }
@@ -41,19 +57,11 @@ public class Cancion {
         this.duracion = duracion;
     }
    
-    public int getId_disco() {
-        return id_disco;
-    }
-
-    public void setId_disco(int id_disco) {
-        this.id_disco = id_disco;
-    }
-
-    public double getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 

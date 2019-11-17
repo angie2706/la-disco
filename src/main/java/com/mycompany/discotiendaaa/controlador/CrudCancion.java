@@ -22,11 +22,10 @@ import javax.enterprise.context.SessionScoped;
  */
 @Named(value = "crudCancion")
 @SessionScoped
-public class CrudCancion implements Serializable{
-    
+public class CrudCancion implements Serializable {
+
     private String nombre;
     private String duracion, disco;
-    private int id_disco;
     private float precio;
     private List<Cancion> listadoCanciones;
     private List<String> nombreDiscos;
@@ -37,27 +36,27 @@ public class CrudCancion implements Serializable{
      */
     public CrudCancion() {
         cancionDB = new CancionDB();
+        listadoCanciones = new ArrayList();
     }
 
     @PostConstruct
     public void init() {
         llenarListadoDiscos();
+        listadoCanciones.addAll(cancionDB.consultaCanciones());
     }
 
     private void llenarListadoDiscos() {
         nombreDiscos = new ArrayList();
-        nombreDiscos.add("gggg");
-        nombreDiscos.add("fg");
-        nombreDiscos.add("gghhhgg");
+        nombreDiscos.addAll(cancionDB.consultarNombreDiscos());
     }
 
     public void llenarListaCanciones() {
         try {
-            cancionDB.agregarCancion(nombre, duracion, id_disco, precio);
-            
+            cancionDB.agregarCancion(nombre, duracion, disco, precio);
+            listadoCanciones.addAll(cancionDB.consultaCanciones());
         } catch (Exception e) {
             Logger.getLogger(PrincipalControl.class.getName()).log(Level.SEVERE,
-                    "error metodo llenarListaCanciones() :" + CrudCancion.class.getName() + " " + e, e);
+                    "error método llenarListaCanciones() :" + CrudCancion.class.getName() + " " + e, e);
         }
 
     }
@@ -76,15 +75,6 @@ public class CrudCancion implements Serializable{
 
     public void setDuracion(String duracion) {
         this.duracion = duracion;
-    }
-
-
-    public int getId_disco() {
-        return id_disco;
-    }
-
-    public void setId_disco(int id_disco) {
-        this.id_disco = id_disco;
     }
 
     public float getPrecio() {
@@ -126,5 +116,5 @@ public class CrudCancion implements Serializable{
     public void setDisco(String disco) {
         this.disco = disco;
     }
-    
+
 }
