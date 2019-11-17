@@ -48,7 +48,5 @@ public class Principal implements Serializable {
     public void setPagina(String pagina) {
         this.pagina = pagina;
     }
-
-   
-
+  
 }

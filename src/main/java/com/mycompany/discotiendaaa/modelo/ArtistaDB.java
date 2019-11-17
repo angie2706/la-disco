@@ -5,39 +5,36 @@
  */
 package com.mycompany.discotiendaaa.modelo;
 
-import com.mycompany.discotiendaaa.pojo.Cancion;
+import com.mycompany.discotiendaaa.pojo.Artista;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
  *
- * @author familia manrique
+ * @author angie
  */
-public class CancionDB {
-
+public class ArtistaDB {
     Connection conn = null;
     Statement stm;
     ResultSet rs;
     int resultUpdate = 0;
 
-    Cancion cancion;
-    int id_cancion, id_disco;
-    double precio;
-    String nombre, nombreDisco, duracion;
-
-    public void agregarCancion(String nombre, String duracion, int id_disco, float precio) {
+    
+    public void agregarCancion(Artista artista) {
         try {
             conn = ConexionDB.abrir();
             stm = conn.createStatement();
-            resultUpdate = stm.executeUpdate("INSERT INTO cancion(nombre, duracion, id_disco, precio)VALUES ('" + nombre + "', '" + duracion + "', " + id_disco + ", " + precio + ")");
-            System.out.println("Canción agregada.");
+            java.sql.Date sDate = new java.sql.Date(artista.getFechaNacimiento().getTime());
+            resultUpdate = stm.executeUpdate("INSERT INTO artista(nombre, apellido, fecha_nacimiento, nacionalidad) VALUES ('"
+                    + artista.getNombre() + "', '" + artista.getApellido() + "', '" + sDate + "', '" + artista.getNacionalidad() + "')");
             if (resultUpdate != 0) {
                 ConexionDB.cerrar();
             } else {
                 ConexionDB.cerrar();
             }
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("Error en la base de datos.");
         }
     }

@@ -16,27 +16,27 @@
                 <h:panelGrid id="grid" columns="3" cellspacing="5" cellpadding="10" style="margin: auto;">
 
                     <p:outputLabel  value="#{msg.nombre}"/>
-                    <p:inputText id="nom" value="#{crearCancionControl.nombre}" required="true" label="Nombre*" style="width:95% "></p:inputText>
+                    <p:inputText id="nom" value="#{crudCancion.nombre}" required="true" label="Nombre*" style="width:95% "></p:inputText>
                     <p:message for="nom"/>
 
                     <p:outputLabel  value="#{msg.duracion}"/>
-                    <p:inputText id="dur" value="#{crearCancionControl.duracion}" required="true" label="Duracion*" style="width:95% " type="number"></p:inputText>
+                    <p:inputText id="dur" value="#{crudCancion.duracion}" required="true" label="Duracion*" style="width:95% " ></p:inputText>
                     <p:message for="dur"/>
 
                     <p:outputLabel  value="#{msg.disco}"/>
-                    <p:selectOneMenu id="disco" value="#{crearCancionControl.disco}" style="width:90%">
+                    <p:selectOneMenu id="disco" value="#{crudCancion.disco}" style="width:90%">
                         <f:selectItem itemLabel="#{msg.selecciona}" itemValue="#{null}" noSelectionOption="true" />
-                        <f:selectItems value="#{crearCancionControl.nombreDiscos}"/>  
+                        <f:selectItems value="#{crudCancion.nombreDiscos}"/>  
                     </p:selectOneMenu>
                     <p:message for="disco"/>
 
                     <p:outputLabel  value="#{msg.precio}"/>
-                    <p:inputText id="precio" value="#{crearCancionControl.precio}" required="true" label="Precio*" style="width:95% "></p:inputText>
+                    <p:inputText id="precio" value="#{crudCancion.precio}" required="true" label="Precio*" style="width:95% "></p:inputText>
                     <p:message for="precio"/>
 
                 </h:panelGrid>
                 <br></br>
-                <p:commandButton id="add" actionListener="#{crudCancion.crearCancion()}" update="pan" value="#{msg.agregar}" style="margin-left:45%; width: 30%;"/>
+                <p:commandButton id="add" actionListener="#{crudCancion.llenarListaCanciones()}" update="pan" value="#{msg.agregar}" style="margin-left:45%; width: 30%;"/>
 
             </h:panelGroup>
         </h:form>
