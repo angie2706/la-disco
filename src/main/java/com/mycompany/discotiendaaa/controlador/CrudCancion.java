@@ -117,7 +117,6 @@ public class CrudCancion implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } catch (Exception e) {
         }
-
     }
 
     public String getNombre() {

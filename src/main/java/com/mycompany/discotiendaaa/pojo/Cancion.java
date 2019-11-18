@@ -14,7 +14,6 @@ public class Cancion {
     private int id_cancion;
     private String nombre;
     private String duracion;
-    private int id_disco;
     private String nombre_disco;
     private float precio;
     private boolean seleccion;
@@ -33,14 +32,6 @@ public class Cancion {
 
     public void setId_cancion(int id_cancion) {
         this.id_cancion = id_cancion;
-    }
-
-    public int getId_disco() {
-        return id_disco;
-    }
-
-    public void setId_disco(int id_disco) {
-        this.id_disco = id_disco;
     }
 
     public String getNombre_disco() {
