@@ -15,6 +15,9 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -27,9 +30,12 @@ public class CrudCancion implements Serializable {
     private String nombre;
     private String duracion, disco;
     private float precio;
+    private int id_cancion;
     private List<Cancion> listadoCanciones;
     private List<String> nombreDiscos;
     CancionDB cancionDB;
+    Cancion cancion;
+    private ArrayList<Cancion> cancionesEliminadas;
 
     /**
      * Creates a new instance of CrudCancion
@@ -37,6 +43,7 @@ public class CrudCancion implements Serializable {
     public CrudCancion() {
         cancionDB = new CancionDB();
         listadoCanciones = new ArrayList();
+        cancionesEliminadas = new ArrayList();
     }
 
     @PostConstruct
@@ -55,8 +62,60 @@ public class CrudCancion implements Serializable {
             cancionDB.agregarCancion(nombre, duracion, disco, precio);
             listadoCanciones.addAll(cancionDB.consultaCanciones());
         } catch (Exception e) {
-            Logger.getLogger(PrincipalControl.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(CrudCancion.class.getName()).log(Level.SEVERE,
                     "error método llenarListaCanciones() :" + CrudCancion.class.getName() + " " + e, e);
+        }
+
+    }
+
+    public void onRowEdit(RowEditEvent event) {
+        try {
+            id_cancion = ((Cancion) event.getObject()).getId_cancion();
+            nombre = ((Cancion) event.getObject()).getNombre();
+            duracion = ((Cancion) event.getObject()).getDuracion();
+            disco = ((Cancion) event.getObject()).getNombre_disco();
+            precio = ((Cancion) event.getObject()).getPrecio();
+            cancionDB.modificarCancion(id_cancion, nombre, duracion, disco, precio);
+            FacesMessage msg = new FacesMessage("Vehículo editado con exito", ((Cancion) event.getObject()).getNombre());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } catch (Exception e) {
+            Logger.getLogger(CrudCancion.class.getName()).log(Level.SEVERE,
+                    "error onRowEdit:" + CrudCancion.class.getName() + " " + e, e);
+        }
+    }
+
+    /**
+     * Método que cancela la edición de la fila seleccionada
+     *
+     * @param event
+     */
+    public void onRowCancel(RowEditEvent event) {
+        try {
+            FacesMessage msg = new FacesMessage("Edición Cancelada: ", ((Cancion) event.getObject()).getNombre());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } catch (Exception e) {
+            Logger.getLogger(CrudCancion.class.getName()).log(Level.SEVERE,
+                    "error onRowCancel:" + CrudCancion.class.getName() + " " + e, e);
+        }
+
+    }
+
+    public void eliminar() {
+        try {
+            for (Cancion c : listadoCanciones) {
+                if (c.isSeleccion()) {
+                    cancionesEliminadas.add(c);
+                }
+            }
+            if (!cancionesEliminadas.isEmpty()) {
+                for (Cancion s : cancionesEliminadas) {
+                    cancionDB.eliminarCancion(s.getId_cancion());
+                }
+                listadoCanciones.removeAll(cancionesEliminadas);
+            }
+            FacesMessage msg = new FacesMessage("Eliminados con exito");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } catch (Exception e) {
         }
 
     }
@@ -115,6 +174,22 @@ public class CrudCancion implements Serializable {
 
     public void setDisco(String disco) {
         this.disco = disco;
+    }
+
+    public ArrayList<Cancion> getCancionesEliminadas() {
+        return cancionesEliminadas;
+    }
+
+    public void setCancionesEliminadas(ArrayList<Cancion> cancionesEliminadas) {
+        this.cancionesEliminadas = cancionesEliminadas;
+    }
+
+    public int getId_cancion() {
+        return id_cancion;
+    }
+
+    public void setId_cancion(int id_cancion) {
+        this.id_cancion = id_cancion;
     }
 
 }
