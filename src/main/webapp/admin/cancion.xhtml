@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>#{msg.titulo}</title>
     </h:head>
     <h:body>
         <h:panelGroup layout="block" style="text-align: center;">
@@ -33,10 +33,9 @@
                     <p:outputLabel  value="#{msg.precio}"/>
                     <p:inputText id="precio" value="#{crudCancion.precio}" required="true" label="Precio*" style="width:95% "></p:inputText>
                     <p:message for="precio"/>
-
                 </h:panelGrid>
                 <br></br>
-                <center><p:commandButton value="#{msg.agregar}" update="@form" actionListener="#{crudCancion.llenarListaCanciones()}"  process="@form"
+                <center><p:commandButton id="add" value="#{msg.agregar}" update="@form" actionListener="#{crudCancion.llenarListaCanciones()}"  process="@form"
                                          ajax="true" icon="ui-icon-plus" style="background-color: cadetblue;" /></center>
             </h:panelGroup>
             <br></br><br></br>

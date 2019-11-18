@@ -11,24 +11,25 @@ package com.mycompany.discotiendaaa.pojo;
  */
 public class Disco {
 
-    private int id_cancion;
+    private int id_disco;
     private String nombre;
     private String caratula;
-    private int id_artista;
+    private String nombre_artista;
+    private boolean seleccion;
 
-    public Disco(int id_cancion, String nombre, String caratula, int id_artista) {
-        this.id_cancion = id_cancion;
+    public Disco(int id_disco, String nombre, String caratula, String nombre_artista) {
+        this.id_disco = id_disco;
         this.nombre = nombre;
         this.caratula = caratula;
-        this.id_artista = id_artista;
+        this.nombre_artista = nombre_artista;
     }
     
-    public int getId_cancion() {
-        return id_cancion;
+    public int getId_disco() {
+        return id_disco;
     }
 
-    public void setId_cancion(int id_cancion) {
-        this.id_cancion = id_cancion;
+    public void setId_disco(int id_disco) {
+        this.id_disco = id_disco;
     }
 
     public String getNombre() {
@@ -47,12 +48,20 @@ public class Disco {
         this.caratula = caratula;
     }
 
-    public int getId_artista() {
-        return id_artista;
+    public String getNombre_artista() {
+        return nombre_artista;
     }
 
-    public void setId_artista(int id_artista) {
-        this.id_artista = id_artista;
+    public void setNombre_artista(String id_artista) {
+        this.nombre_artista = id_artista;
+    }
+
+    public boolean isSeleccion() {
+        return seleccion;
+    }
+
+    public void setSeleccion(boolean seleccion) {
+        this.seleccion = seleccion;
     }
 
 }
