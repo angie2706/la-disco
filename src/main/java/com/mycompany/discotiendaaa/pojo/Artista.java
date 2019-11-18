@@ -11,21 +11,11 @@ import java.util.Date;
  * @author angie
  */
 public class Artista {
-    private int id_artista;
     private String nombre;
     private String apellido;
     private Date fechaNacimiento;
     private String nacionalidad;
-    private boolean seleccion;
 
-    public int getId_artista() {
-        return id_artista;
-    }
-
-    public void setId_artista(int id_artista) {
-        this.id_artista = id_artista;
-    }
-       
     public String getNombre() {
         return nombre;
     }
@@ -56,14 +46,6 @@ public class Artista {
 
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
-    }
-
-    public boolean isSeleccion() {
-        return seleccion;
-    }
-
-    public void setSeleccion(boolean seleccion) {
-        this.seleccion = seleccion;
     }
     
     
