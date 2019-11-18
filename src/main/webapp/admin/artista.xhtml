@@ -2,9 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>#{msg.titulo}</title>
     </h:head>
     <h:body >
         <h:panelGroup layout="block" style="text-align: center;">
@@ -14,26 +15,96 @@
             <h:panelGroup id="panel" layout="block" style="border: 2px solid black; width: 40%; padding: 1%; margin: auto; margin-top: 5%; background-color: white; border-radius: 2%;">
                 <h:panelGrid id="grid" columns="3" cellspacing="5" cellpadding="10" style="margin: auto;">
                     <p:outputLabel  value="#{msg.nombre}"/>
-                    <p:inputText id="nom" value="#{artista.nombre}" required="true" label="Nombre*" style="width:95% "></p:inputText>
+                    <p:inputText id="nom" value="#{crudArtista.nombre}" required="true" label="Nombre*" style="width:95% "></p:inputText>
                     <p:message for="nom"/>
 
                     <p:outputLabel  value="#{msg.apellido}"/>
-                    <p:inputText id="apel" value="#{artista.apellido}" required="true" label="Apellido*" style="width:95% "></p:inputText>
+                    <p:inputText id="apel" value="#{crudArtista.apellido}" required="true" label="Apellido*" style="width:95% "></p:inputText>
                     <p:message for="apel"/>
 
                     <p:outputLabel  value="#{msg.fechanac}"/>
-                    <p:calendar id="fnac" value="#{artista.fechaNacimiento}" showOn="button" pattern="yyyy-mm-dd" yearRange="1960:2019" required="true"/>
+                    <p:calendar id="fnac" value="#{crudArtista.fechaNacimiento}" showOn="button" pattern="yyyy-mm-dd" yearRange="1960:2019" required="true"/>
                     <p:message for="fnac"/>
 
                     <p:outputLabel  value="#{msg.nacionalidad}"/>
-                    <p:inputText id="nacion" value="#{artista.nacionalidad}" required="true" label="Nacionalidad*" style="width:95% "></p:inputText>
+                    <p:inputText id="nacion" value="#{crudArtista.nacionalidad}" required="true" label="Nacionalidad*" style="width:95% "></p:inputText>
                     <p:message for="nacion"/>
-
                 </h:panelGrid>
                 <br></br>
-                <p:commandButton id="add" action="#{artista.crearArtista()}" update="panel" value="#{msg.agregar}" style="margin-left:45%; width: 30%;" ajax="false"/>
+                <p:commandButton id="add" action="#{crudArtista.crearArtista}" update="tablita" value="#{msg.agregar}" style="margin-left:45%; width: 30%;" ajax="false"/>
                 <p:growl id="messages" showDetail="true" />
+                <br></br>
             </h:panelGroup>
+            <h:panelGroup id="tablita">
+                <p:dataTable id="dtArtistas" var="cancion" value="#{crudArtista.artistas}" editable="true" widgetVar="DTartistasrar" 
+                             style="width: 70%; margin: auto;"
+                             rows="10"
+                             paginator="true"
+                             paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15" 
+                             emptyMessage="No se han encontrado registros">
+                    <font></font>
+                    <p:ajax event="rowEdit" listener="#{crudArtista.onRowEdit}"  />
+                    <p:ajax event="rowEditCancel" listener="#{crudArtista.onRowCancel}" />!
+                    <p:column headerText="ID">
+                        <h:outputText value="#{artista.id_artista}" />
+                    </p:column>
+
+                    <p:column headerText="#{msg.nombre}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{artista.nombre}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{artista.nombre}" style="width:100%" label="Nombre"/></f:facet>
+                        </p:cellEditor>                        
+                    </p:column>
+
+                    <p:column headerText="#{msg.apellido}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{artista.apellido}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{artista.apellido}" style="width:100%" label="Nombre"/></f:facet>
+                        </p:cellEditor>                         
+                    </p:column>
+
+                    <p:column headerText="#{msg.fechanac}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{artista.fechaNacimiento}" /></f:facet>
+                            <f:facet name="input">
+                                <p:calendar id="fnac" value="#{artista.fechaNacimiento}" showOn="button" pattern="yyyy-mm-dd" yearRange="1960:2019" required="true"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msg.nacionalidad}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{artista.nacionalidad}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{artista.nacionalidad}" style="width:100%" label="Nombre"/></f:facet>
+                        </p:cellEditor>                
+                    </p:column>
+
+                    <p:column headerText="#{msg.editar}">
+                        <p:rowEditor />
+                    </p:column><font></font>
+                    <p:column headerText="#{msg.eliminar}">
+                        <h:selectBooleanCheckbox value="#{artista.seleccion}"/>
+                    </p:column><font></font>
+                </p:dataTable>
+            </h:panelGroup>
+            <br></br><br></br>
+            <h:panelGroup id="panel2">
+                <center><p:commandButton id="eli" value="#{msg.eliminar}" update="panel" actionListener="#{crudArtista.eliminar}"  process="panel"
+                                         ajax="true" icon="ui-icon-trash" style="background-color: cadetblue;">
+                        <p:confirm message="#{msg.mensajeEliminar}" header="Aviso" icon="ui-icon-alert"/>
+                    </p:commandButton></center>
+                <p:message for="eli"/>
+            </h:panelGroup>
+
+            <p:confirmDialog global="true">
+                <p:commandButton value="si" type="Button" icon="ui-icon-check"
+                                 styleClass="ui-confirmdialog-yes"/>
+                <p:commandButton value="no" type="Button" icon="ui-icon-check"
+                                 styleClass="ui-confirmdialog-no"/>
+            </p:confirmDialog>
+
         </h:form>
     </h:body>
 </html>
