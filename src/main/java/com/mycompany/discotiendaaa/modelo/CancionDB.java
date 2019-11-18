@@ -49,8 +49,8 @@ public class CancionDB {
         try {
             conn = ConexionDB.abrir();
             stm = conn.createStatement();
-            rs = stm.executeQuery("SELECT a.id_cancion, a.nombre, a.duracion, b.nombre AS nombre_disco, a.precio\n" +
-"                    + FROM cancion a, disco b WHERE a.id_disco = b.id_disco order by id_cancion asc");
+            rs = stm.executeQuery("SELECT a.id_cancion, a.nombre, a.duracion, b.nombre AS nombre_disco, a.precio\n"
+                    + "	FROM cancion a, disco b WHERE a.id_disco = b.id_disco order by id_cancion asc");
             System.out.println("Consulta de canciones realizada");
             if (!rs.next()) {
                 System.out.println(" No se encontraron registros");

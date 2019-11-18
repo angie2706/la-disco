@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>#{msg.titulo}</title>
+        <title>Facelet Title</title>
     </h:head>
      <h:body>
          <h:panelGroup layout="block" style="text-align: center;">
@@ -16,90 +16,23 @@
                 <h:panelGrid id="grid" columns="3" cellspacing="5" cellpadding="10" style="margin: auto;">
 
                     <p:outputLabel  value="#{msg.nombre}"/>
-                    <p:inputText id="nom" value="#{crudDisco.nombre}"  style="width:95% "></p:inputText>
+                    <p:inputText id="nom" value="#{crearDiscoControl.nombre}"  style="width:95% "></p:inputText>
                     <p:message for="nom"/>
 
                     <p:outputLabel  value="#{msg.caratula}"/>
-                    <p:fileUpload value="#{crudDisco.file}" mode="simple" />
+                    <p:fileUpload value="#{crearDiscoControl.file}" mode="simple" />
                     <h:outputLabel/>
 
                     <p:outputLabel  value="#{msg.artista}"/>
-                    <p:selectOneMenu id="ar" value="#{crudDisco.artista}" style="width:90%">
+                    <p:selectOneMenu id="ar" value="#{crearDiscoControl.artista}" style="width:90%">
                         <f:selectItem itemLabel="#{msg.selecciona}" itemValue="#{null}" noSelectionOption="true" />
-                        <f:selectItems value="#{crudDisco.nombreArtistas}"/>  
+                        <f:selectItems value="#{crearDiscoControl.artistaNombre}"/>  
                     </p:selectOneMenu>
                     <p:message for="ar"/>
                 </h:panelGrid>
                 <br></br>
-                 <br></br>
-                 <center><p:commandButton value="#{msg.agregar}" update="@form" actionListener="#{crudDisco.llenarListaDiscos()}"  process="@form"
-                                         ajax="true" icon="ui-icon-plus" style="background-color: cadetblue;" /></center>
-            </h:panelGroup>
-            <br></br><br></br>
-            <h:panelGroup id="panel" layout="block">
-                <p:dataTable id="dtDiscos" var="cancion" value="#{crudDisco.listadoDiscos}" editable="true" widgetVar="DTdiscos" 
-                             style="width: 70%; margin: auto;"
-                             rows="10"
-                             paginator="true"
-                             paginatorPosition="bottom"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" 
-                             emptyMessage="No se han encontrado registros">
-                    <font></font>
-                    <p:ajax event="rowEdit" listener="#{crudDisco.onRowEdit}"  />
-                    <p:ajax event="rowEditCancel" listener="#{crudDisco.onRowCancel}" />
-
-                    <p:column headerText="ID">
-                        <h:outputText value="#{disco.id_disco}" />
-                    </p:column>
-
-                    <p:column headerText="#{msg.nombre}">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{disco.nombre}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{disco.nombre}" style="width:100%" label="Nombre"/></f:facet>
-                        </p:cellEditor>                        
-                    </p:column>
-
-                    <p:column headerText="#{msg.caratula}">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{disco.caratula}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{disco.caratula}" style="width:100%" label="Nombre"/></f:facet>
-                        </p:cellEditor>                         
-                    </p:column>
-
-                    <p:column headerText="#{msg.artista}">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{disco.nombre_artista}" /></f:facet>
-                            <f:facet name="input">
-                                <h:selectOneMenu value="#{disco.nombre_artista}" style="width:100%">
-                                    <f:selectItems value="#{crudDisco.nombreArtistas}" />
-                                </h:selectOneMenu>
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="#{msg.editar}">
-                        <p:rowEditor />
-                    </p:column><font></font>
-                    <p:column headerText="#{msg.eliminar}">
-                        <h:selectBooleanCheckbox value="#{disco.seleccion}"/>
-                    </p:column><font></font>
-                </p:dataTable>
-                <br></br><br></br>
-                <h:panelGroup id="panel2">
-                    <center><p:commandButton id="eli" value="#{msg.eliminar}" update="panel" actionListener="#{crudDisco.eliminar}"  process="panel"
-                                             ajax="true" icon="ui-icon-trash" style="background-color: cadetblue;">
-                                <p:confirm message="#{msg.mensajeEliminar}" header="Aviso" icon="ui-icon-alert"/>
-                    </p:commandButton></center>
-                    <p:message for="eli"/>
-                </h:panelGroup>
-
-                <p:confirmDialog global="true">
-                    <p:commandButton value="si" type="Button" icon="ui-icon-check"
-                                     styleClass="ui-confirmdialog-yes"/>
-                    <p:commandButton value="no" type="Button" icon="ui-icon-check"
-                                     styleClass="ui-confirmdialog-no"/>
-                </p:confirmDialog>
+                <p:commandButton value="#{msg.crear}" ajax="false" action="#{crearDiscoControl.crearDisco}" style="margin-left:45%; width: 30%;"/>
+                <p:growl id="messages" showDetail="true" />
             </h:panelGroup>
 
         </h:form>
