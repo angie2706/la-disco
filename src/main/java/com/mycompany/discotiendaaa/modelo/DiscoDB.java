@@ -24,15 +24,15 @@ public class DiscoDB {
 
     Disco disco;
     int id_disco, id_artista;
-    String nombre, caratula, nombre_artista, apellido_artista, nombre_completo;
+    String nombre, caratula, nombre_artista;
 
     
-    public void agregarDisco(String nombre, String caratula, String nombre_artista, String apellido_artista) {
+    public void agregarDisco(String nombre, String caratula, String nombre_artista) {
         try {
             conn = ConexionDB.abrir();
             stm = conn.createStatement();
             resultUpdate = stm.executeUpdate("INSERT INTO disco(nombre, caratula, id_artista)VALUES ('" + nombre + "', '" + caratula + "', "
-                    + "(SELECT id_disco FROM disco WHERE '" + nombre_artista + "' = nombre and '"+ apellido_artista + "' = nombre)" + ")");
+                    + "(SELECT id_artista FROM artista WHERE '"+nombre_artista+"' = nombre || apellido)" + ")");
             System.out.println("Disco agregado.");
             if (resultUpdate != 0) {
                 ConexionDB.cerrar();
@@ -60,9 +60,7 @@ public class DiscoDB {
                     id_disco = rs.getInt("id_disco");
                     nombre = rs.getString("nombre");
                     caratula = rs.getString("caratula");
-                    nombre_artista= rs.getString("nombre_artista");
-                    apellido_artista=rs.getString("apellido_artista");
-                    nombre_completo = rs.getString("nombre_artista")+rs.getString("apellido_artista");
+                    nombre_artista = rs.getString("nombre_artista")+rs.getString("apellido_artista");
 
                     disco = new Disco(id_disco, nombre, caratula, nombre_artista);
                     listadoDiscos.add(disco);
@@ -89,8 +87,8 @@ public class DiscoDB {
                 return null;
             } else {
                 do {
-                    nombre_completo = rs.getString("nombre_artista")+rs.getString("apellido_artista");
-                    nombresDiscos.add(nombre_completo);
+                    nombre_artista = rs.getString("nombre_artista")+rs.getString("apellido_artista");
+                    nombresDiscos.add(nombre_artista);
                 } while (rs.next());
                 ConexionDB.cerrar();
                 return nombresDiscos;
@@ -98,6 +96,39 @@ public class DiscoDB {
         } catch (Exception e) {
             System.out.println("Error en la base de datos.");
             return null;
+        }
+    }
+    
+    public void modificarDisco(int id_disco, String nombre, String caratula, String nombre_artista) {
+        try {
+            conn = ConexionDB.abrir();
+            stm = conn.createStatement();
+            resultUpdate = stm.executeUpdate("update disco set nombre='"+nombre+"', caratula='"+caratula+"', \n"
+                    + "	id_artista=(SELECT id_artista FROM artista WHERE '"+nombre_artista+"' = nombre || apellido)" + "where id_disco="+id_disco+"");
+
+            if (resultUpdate != 0) {
+                ConexionDB.cerrar();
+            } else {
+                ConexionDB.cerrar();
+            }
+        } catch (Exception e) {
+            System.out.println("Error en la base de datos.");
+        }
+    }
+
+    public void eliminarDisco(int id_disco) {
+        try {
+            conn = ConexionDB.abrir();
+            stm = conn.createStatement();
+            resultUpdate = stm.executeUpdate("delete from disco where id_disco='"+id_disco+"'");
+            System.out.println("Disco eliminado con éxito");
+            if (resultUpdate != 0) {
+                ConexionDB.cerrar();
+            } else {
+                ConexionDB.cerrar();
+            }
+        } catch (Exception e) {
+            System.out.println("Error en la base de datos.");
         }
     }
 }
