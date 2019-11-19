@@ -60,11 +60,11 @@ public class CrudDisco implements Serializable {
 
     private void llenarListadoDiscos() {
         nombreArtistas = new ArrayList();
-        nombreArtistas.addAll(discoDB.consultarNombreArtistas());
+        nombreArtistas.addAll(discoDB.consultarNombreArtistas());        
     }
 
     public void llenarListaDiscos() {
-        String ruta = "D:/Users/familia manrique/Documents/NetBeansProjects/DiscotiendaAA/src/main/webapp/resources/imagenes/";
+        String ruta="C:/Users/ASUS/Documents/NetBeansProjects/la-disco/src/main/webapp/resources/imagenes/";
         String rutaimg;
         try {
             InputStream input = imagen.getInputstream();
@@ -75,7 +75,7 @@ public class CrudDisco implements Serializable {
             while ((read = input.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
-            caratula = rutaimg.substring(69);
+            caratula = rutaimg.substring(66);
             discoDB.agregarDisco(nombre, caratula, artista);
             listadoDiscos.addAll(discoDB.consultaDiscos());
         } catch (Exception e) {

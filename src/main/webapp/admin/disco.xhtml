@@ -31,8 +31,8 @@
                     <p:message for="ar"/>
                 </h:panelGrid>
                 <br></br>
-                <center><p:commandButton id="add" value="#{msg.agregar}" update="@form" actionListener="#{crudDisco.llenarListaDiscos()}"  process="@form"
-                                         ajax="true" icon="ui-icon-plus" style="background-color: cadetblue;" /></center>
+                <center><p:commandButton id="add" value="#{msg.agregar}"  action="#{crudDisco.llenarListaDiscos()}"  process="@form"
+                                         ajax="false" icon="ui-icon-plus" style="background-color: cadetblue;" /></center>
             </h:panelGroup>
             <br></br><br></br>
             <h:panelGroup id="panel" layout="block">
