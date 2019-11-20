@@ -99,11 +99,11 @@ public class DiscoDB {
         }
     }
     
-    public void modificarDisco(int id_disco, String nombre, String caratula, String nombre_artista) {
+    public void modificarDisco(int id_disco, String nombre, String nombre_artista) {
         try {
             conn = ConexionDB.abrir();
             stm = conn.createStatement();
-            resultUpdate = stm.executeUpdate("update disco set nombre='"+nombre+"', caratula='"+caratula+"', \n"
+            resultUpdate = stm.executeUpdate("update disco set nombre='"+nombre+"', \n"
                     + "	id_artista=(SELECT id_artista FROM artista WHERE '"+nombre_artista+"' = nombre || apellido)" + "where id_disco="+id_disco+"");
 
             if (resultUpdate != 0) {
