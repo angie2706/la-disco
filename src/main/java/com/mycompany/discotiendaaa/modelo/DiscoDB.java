@@ -131,4 +131,34 @@ public class DiscoDB {
             System.out.println("Error en la base de datos.");
         }
     }
+    
+    public ArrayList<Disco> consultaDisco_Art(int id_artista) {
+        ArrayList<Disco> listadoDiscos = new ArrayList();
+        try {
+            conn = ConexionDB.abrir();
+            stm = conn.createStatement();
+            rs = stm.executeQuery("SELECT a.id_disco, a.nombre, a.caratula, b.nombre AS nombre_artista, b.apellido AS apellido_artista\n" +
+"                    FROM disco a, artista b WHERE a.id_artista b.="+id_artista+" order by id_disco asc");
+            if (!rs.next()) {
+                System.out.println(" No se encontraron registros");
+                ConexionDB.cerrar();
+                return null;
+            } else {
+                do {
+                    id_disco = rs.getInt("id_disco");
+                    nombre = rs.getString("nombre");
+                    caratula = rs.getString("caratula");
+                    nombre_artista = rs.getString("nombre_artista")+rs.getString("apellido_artista");
+
+                    disco = new Disco(id_disco, nombre, caratula, nombre_artista);
+                    listadoDiscos.add(disco);
+                } while (rs.next());
+                ConexionDB.cerrar();
+                return listadoDiscos;
+            }
+        } catch (Exception e) {
+            System.out.println("Error en la base de datos.");
+            return null;
+        }
+    }
 }

@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -96,7 +97,8 @@ public class CrudArtista implements Serializable {
 
     public void crearArtista() {
         artista = llenarArtista();
-        db.agregarCancion(artista);
+        db.agregarArtista(artista);
+        consultarArtista();
     }
 
     public Artista llenarArtista() {
@@ -104,11 +106,12 @@ public class CrudArtista implements Serializable {
         artista.setApellido(apellido);
         artista.setFechaNacimiento(fechaNacimiento);
         artista.setNacionalidad(nacionalidad);
-        return artista;
+        return artista;    
     }
 
     @PostConstruct
     public void consultarArtista() {
+        artistas.removeAll(artistas);
         artistas.addAll(db.consultaArtistas());
     }
 
@@ -164,14 +167,6 @@ public class CrudArtista implements Serializable {
         } catch (Exception e) {
         }
 
-    }
-
-    public ArtistaDB getDb() {
-        return db;
-    }
-
-    public void setDb(ArtistaDB db) {
-        this.db = db;
     }
 
     public List<Artista> getEliminados() {

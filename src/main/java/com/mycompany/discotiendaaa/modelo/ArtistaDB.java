@@ -16,13 +16,13 @@ import java.util.ArrayList;
  * @author angie
  */
 public class ArtistaDB {
+
     Connection conn = null;
     Statement stm;
     ResultSet rs;
     int resultUpdate = 0;
 
-    
-    public void agregarCancion(Artista artista) {
+    public void agregarArtista(Artista artista) {
         try {
             conn = ConexionDB.abrir();
             stm = conn.createStatement();
@@ -39,7 +39,7 @@ public class ArtistaDB {
             System.out.println("Error en la base de datos.");
         }
     }
-    
+
     public ArrayList<Artista> consultaArtistas() {
         ArrayList<Artista> artistas = new ArrayList();
         try {
@@ -74,10 +74,9 @@ public class ArtistaDB {
         try {
             conn = ConexionDB.abrir();
             stm = conn.createStatement();
-            resultUpdate = stm.executeUpdate("update artista set nombre='"+artista.getNombre()+"', apellido='"+artista.getApellido()+"', \n"
-                    + "fecha_nacimiento'"+artista.getFechaNacimiento()+"'nacionalidad'"+artista.getNacionalidad()+"'\n"
-                    + "where id_artista="+artista.getId_artista()+"");
-
+            resultUpdate = stm.executeUpdate("update artista set nombre='" + artista.getNombre() + "', apellido='" + artista.getApellido() + "',\n"
+                    + "fecha_nacimiento='" + artista.getFechaNacimiento() + "', nacionalidad='" + artista.getNacionalidad() + "' \n"
+                    + " where id_artista=" + artista.getId_artista() + "");
             if (resultUpdate != 0) {
                 ConexionDB.cerrar();
             } else {
@@ -85,6 +84,7 @@ public class ArtistaDB {
             }
         } catch (Exception e) {
             System.out.println("Error en la base de datos.");
+            System.out.println(e);
         }
     }
 
@@ -92,7 +92,7 @@ public class ArtistaDB {
         try {
             conn = ConexionDB.abrir();
             stm = conn.createStatement();
-            resultUpdate = stm.executeUpdate("delete from artista where id_artista='"+id_artista+"'");
+            resultUpdate = stm.executeUpdate("delete from artista where id_artista='" + id_artista + "'");
             System.out.println("Artista eliminado con éxito");
             if (resultUpdate != 0) {
                 ConexionDB.cerrar();

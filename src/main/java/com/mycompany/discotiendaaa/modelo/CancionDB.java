@@ -134,4 +134,36 @@ public class CancionDB {
             System.out.println("Error en la base de datos.");
         }
     }
+    
+    public ArrayList<Cancion> consultarCan_Dis(int id_disco){
+        ArrayList<Cancion> canciones = new ArrayList();
+        try {
+            conn = ConexionDB.abrir();
+            stm = conn.createStatement();
+            rs = stm.executeQuery("SELECT a.id_cancion, a.nombre, a.duracion, b.nombre AS nombre_disco, a.precio\n"
+                    + "	FROM cancion a, disco b WHERE a.id_disco =b."+id_disco+"order by id_cancion asc");
+            System.out.println("Consulta de canciones realizada");
+            if (!rs.next()) {
+                System.out.println(" No se encontraron registros");
+                ConexionDB.cerrar();
+                return null;
+            } else {
+                do {
+                    id_cancion = rs.getInt("id_cancion");
+                    nombre = rs.getString("nombre");
+                    duracion = rs.getString("duracion");
+                    precio = rs.getFloat("precio");
+                    nombre_disco = rs.getString("nombre_disco");
+
+                    cancion = new Cancion(id_cancion, nombre, duracion, nombre_disco, precio);
+                    canciones.add(cancion);
+                } while (rs.next());
+                ConexionDB.cerrar();
+                return canciones;
+            }
+        } catch (Exception e) {
+            System.out.println("Error en la base de datos.");
+            return null;
+        }
+    }
 }
