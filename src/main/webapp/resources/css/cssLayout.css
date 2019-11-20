@@ -1,61 +1,57 @@
-
+body{
+    background-color: #0B5345;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
 #top {
-    position: relative;
-    background-color: #036fab;
-    color: white;
-    padding: 5px;
-    margin: 0px 0px 10px 0px;
+    position: absolute;
+    top: 0; left: 0;
+    background-color: #212F3C;
+    color: #ECF0F1;
+    height:5%;
+    padding:2%;
+    width: 100%;
+}
+#titulo{
+    font:normal 1.7em Engravers MT;
+    float: left;
+    width: 50%;
+    margin-left: 20%;
+    text-align: center;
 }
 
-#bottom {
-    position: relative;
-    background-color: #c2dfef;
-    padding: 5px;
-    margin: 10px 0px 0px 0px;
+#idioma{
+    margin-left: 70%;
+    font-size: 0.85em;
+    width: 20%;
+    margin-top: -0.5%;
 }
 
 #left {
-    float: left;
-    background-color: #ece3a5;
-    padding: 5px;
-    width: 150px;
-}
-
-#right {
-    float: right;
-    background-color: #ece3a5;
-    padding: 5px;
-    width: 150px;
-}
-
-.center_content {
     position: relative;
-    background-color: #dddddd;
+    margin-top:5px;
+    margin-left: -1%;
+    float: left;
+    background-color: #0B5345 ;
     padding: 5px;
+    width: 19%;
+    min-height: 500px;    
 }
 
 .left_content {
     background-color: #dddddd;
+    margin-top:6%;
     padding: 5px;
-    margin-left: 170px;
+    margin-left: 19%;
+    min-height: 505px;
 }
-
-.right_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin: 0px 170px 0px 170px;
+#bottom {
+   position: absolute;
+   clear:both;
+   left: 0; right: 0;
+   background-color: #292C2E;
+   color:grey;
+   height: 60px;
 }
-
-#top a:link, #top a:visited {
-  color: white;
-  font-weight : bold;
-  text-decoration: none;
-}
-
-#top a:link:hover, #top a:visited:hover  {
-  color: black;
-  font-weight : bold;
-  text-decoration : underline;
-}
-
 

@@ -8,7 +8,6 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>#{msg.titulo}</title>
         <f:event type="preRenderView" listener="#{login.validarPermiso}" />
@@ -18,15 +17,19 @@
         <h:form>
             <div id="top">
                 <ui:insert name="top">
-                    <h:panelGrid id="grid" columns="3" cellspacing="5" cellpadding="10" style="margin: auto;">
-                        <h:outputLabel  value="#{msg.titulo}" /> 
-                        <h:outputLabel  value="#{msg.idioma}" />  
-                        <h:selectOneMenu value="#{inter.idioma}" 
+                     <div id="titulo">
+                         <p:outputLabel  value="#{msg.titulo}" style="margin-left: 5%; font-family: Engravers MT;"/> 
+                     </div>
+                       <div id="idioma" >
+                    <h:panelGrid id="grid" columns="2" cellspacing="5" cellpadding="10">
+                        <p:outputLabel  value="#{msg.idioma}" />  
+                        <p:selectOneMenu value="#{inter.idioma}" 
                                          onchange="submit()"                                 
                                          valueChangeListener="#{inter.cambioIdioma}">
                             <f:selectItems value="#{inter.listaIdiomas}"  />                    
-                        </h:selectOneMenu>    
-                    </h:panelGrid>                 
+                        </p:selectOneMenu>    
+                    </h:panelGrid> 
+                    </div>          
                 </ui:insert>
             </div>
         </h:form>
@@ -34,11 +37,11 @@
             <h:form>
                 <div id="left">
                     <ui:insert name="left">
-                        <p:commandButton id="btnArtista" actionListener="#{principalControl.irArtista()}" update="centro" value="#{msg.artista}" style="margin-left:45%;"/>
-                        <br></br>
-                        <p:commandButton id="btnCancion" actionListener="#{principalControl.irCancion()}" update="centro" value="#{msg.cancion}" style="margin-left:45%;"/>
-                        <br></br>
-                        <p:commandButton id="btnDisco" actionListener="#{principalControl.irDisco()}" update="centro" value="#{msg.disco}" style="margin-left:45%;"/>
+                        <h:panelGrid id="menu" columns="1" cellspacing="5" cellpadding="10"  style=" margin-top: 5%;margin-left: 1%; width: 18%; text-align: center; position: fixed;">
+                        <p:commandButton id="btnArtista" actionListener="#{principalControl.irArtista()}" update="centro" value="#{msg.artista}" style="width: 100%;"/>
+                        <p:commandButton id="btnCancion" actionListener="#{principalControl.irCancion()}" update="centro" value="#{msg.cancion}" style="width: 100%;"/>
+                        <p:commandButton id="btnDisco" actionListener="#{principalControl.irDisco()}" update="centro" value="#{msg.disco}" style="width: 100%;"/>
+                        </h:panelGrid>
                     </ui:insert>
                 </div>
             </h:form>
@@ -51,7 +54,11 @@
             </div>
         </div>
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom">
+                 <div style="width: 50%; margin: auto; text-align: center; padding-top: 1%;">
+                    <small><h:outputText value="Angie Manrique - Alisson Celeita, Universidad de Cundinamarca 2019."/></small>
+                </div>
+            </ui:insert>
         </div>
 
     </h:body>
