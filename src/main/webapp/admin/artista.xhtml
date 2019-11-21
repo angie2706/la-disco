@@ -24,7 +24,7 @@
                     <p:message for="apel"/>
 
                     <p:outputLabel  value="#{msg.fechanac}"/>
-                    <p:calendar id="fnac" value="#{crudArtista.fechaNacimiento}" showOn="button" pattern="yyyy-mm-dd" yearRange="1960:2019" required="true" navigator="true" />
+                    <p:calendar id="fnac" value="#{crudArtista.fechaNacimiento}" showOn="button" pattern="yyyy-MM-dd" yearRange="1960:2019" required="true" navigator="true"/>
                     <p:message for="fnac"/>
 
                     <p:outputLabel  value="#{msg.nacionalidad}"/>
@@ -70,7 +70,7 @@
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{artista.fechaNacimiento}" /></f:facet>
                             <f:facet name="input">
-                                <p:calendar id="fnac" value="#{crudArtista.fechaNacimiento}" showOn="button" pattern="yyyy-mm-dd" yearRange="1960:2019" required="true" navigator="true" />
+                                <p:calendar id="fnac" value="#{crudArtista.fechaNacimiento}" showOn="button" pattern="yyyy-MM-dd" yearRange="1960:2019" required="true" navigator="true"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>

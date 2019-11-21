@@ -19,7 +19,6 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.validation.constraints.Pattern;
 
 /**
  *

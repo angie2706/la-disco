@@ -42,7 +42,8 @@ public class Internacionalizacion implements Serializable{
         listaIdiomas = new LinkedHashMap<>();        
         Locale espanol = new Locale("ES");
         listaIdiomas.put("Español", espanol);
-        listaIdiomas.put("English", Locale.ENGLISH);      
+        listaIdiomas.put("English", Locale.ENGLISH);
+        listaIdiomas.put("Francais", Locale.FRENCH);
     }    
         
     public void cambioIdioma(ValueChangeEvent e) {

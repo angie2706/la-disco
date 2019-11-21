@@ -14,12 +14,17 @@ public class Compras {
     private String duracion;
     private String nombre_artista;
     private String nombre_disco;
+    private String caratula;
+    private float precio;
+    private boolean seleccion;
 
-    public Compras(String nombre_cancion, String duracion, String nombre_artista, String nombre_disco) {
+   public Compras(String nombre_cancion, String duracion, String nombre_artista, String nombre_disco,String caratula, float precio) {
         this.nombre_cancion = nombre_cancion;
         this.duracion = duracion;
         this.nombre_artista = nombre_artista;
         this.nombre_disco = nombre_disco;
+        this.caratula=caratula;
+        this.precio=precio;
     }
 
     public String getNombre_cancion() {
@@ -52,6 +57,30 @@ public class Compras {
 
     public void setNombre_disco(String nombre_disco) {
         this.nombre_disco = nombre_disco;
+    }
+
+    public String getCaratula() {
+        return caratula;
+    }
+
+    public void setCaratula(String caratula) {
+        this.caratula = caratula;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public boolean isSeleccion() {
+        return seleccion;
+    }
+
+    public void setSeleccion(boolean seleccion) {
+        this.seleccion = seleccion;
     }
     
 }

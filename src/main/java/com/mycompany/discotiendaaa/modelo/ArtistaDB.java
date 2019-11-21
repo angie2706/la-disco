@@ -45,7 +45,7 @@ public class ArtistaDB {
         try {
             conn = ConexionDB.abrir();
             stm = conn.createStatement();
-            rs = stm.executeQuery("Select * from artista");
+            rs = stm.executeQuery("Select * from artista order by id_artista");
             System.out.println("Consulta de artistas realizada");
             if (!rs.next()) {
                 System.out.println(" No se encontraron registros");

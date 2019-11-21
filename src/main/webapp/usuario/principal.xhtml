@@ -9,7 +9,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/cssLayout.css"/>
-        <title>Principal</title>
+        <title>#{msg.titulo}</title>
     </h:head>
 
     <h:body>
@@ -17,40 +17,40 @@
         <h:form>
             <div id="top">
                 <ui:insert name="top">
-                     <div id="titulo">
-                         <p:outputLabel  value="#{msg.titulo}" style="margin-left: 5%; font-family: Engravers MT;"/> 
-                     </div>
+                    <div id="titulo">
+                        <p:outputLabel  value="#{msg.titulo}" style="margin-left: 5%; font-family: Engravers MT;"/> 
+                    </div>
                     <div id="idioma" >
-                    <h:panelGrid id="grid" columns="2" cellspacing="5" cellpadding="10" style="margin: auto;">
-                        <p:outputLabel  value="#{msg.idioma}" />  
-                        <p:selectOneMenu value="#{inter.idioma}" 
-                                         onchange="submit()"                                 
-                                         valueChangeListener="#{inter.cambioIdioma}">
-                            <f:selectItems value="#{inter.listaIdiomas}"  />                    
-                        </p:selectOneMenu>    
-                    </h:panelGrid> 
+                        <h:panelGrid id="grid" columns="2" cellspacing="5" cellpadding="10" style="margin: auto;">
+                            <p:outputLabel  value="#{msg.idioma}" />  
+                            <p:selectOneMenu value="#{inter.idioma}" 
+                                             onchange="submit()"                                 
+                                             valueChangeListener="#{inter.cambioIdioma}">
+                                <f:selectItems value="#{inter.listaIdiomas}"  />                    
+                            </p:selectOneMenu>    
+                        </h:panelGrid> 
                     </div>
                 </ui:insert>
             </div>
         </h:form>
         <div>
             <h:form>
-            <div id="left">
-                <ui:insert name="left">
-                    <h:panelGrid id="menu" columns="1" cellspacing="5" cellpadding="10"  style="margin: auto; text-align: center;">
-                    <p:commandButton id="btnCancion" actionListener="#{principal.irCancion()}" update="centro" value="#{msg.comprarCancion}" style="width: 100%;"/>
-                    <p:commandButton id="btnDisco" actionListener="#{principal.irDisco()}" update="centro" value="#{msg.comprarDisco}" style="width: 100%; " />
-                    <p:commandButton id="btnInicioSesion" actionListener="#{principal.irLogin()}" update="centro" value="#{msg.login}" style="width: 100%;"/>
-                    </h:panelGrid>
-                </ui:insert>
-            </div>
+                <div id="left">
+                    <ui:insert name="left">
+                        <h:panelGrid id="menu" columns="1" cellspacing="5" cellpadding="10"  style="margin: auto; text-align: center;">
+                            <p:commandButton id="btnCarrito" actionListener="#{principal.irCarrito()}" update="centro" value="#{msg.carritocompras}" style="width: 100%; " />
+                            <p:commandButton id="btnInicioSesion" actionListener="#{principal.irLogin()}" update="centro" value="#{msg.login}" style="width: 100%;"/>
+                        </h:panelGrid>
+                    </ui:insert>
+                </div>
             </h:form>
             <div id="content" class="left_content" >
-                 <h:panelGroup id="centro" layout="block" >
+                <h:panelGroup id="centro" layout="block" >
                     <ui:insert name="content">
                         <ui:include src="#{principal.pagina}"/>
                     </ui:insert>
                 </h:panelGroup>
+
             </div>
         </div>
         <div id="bottom">
