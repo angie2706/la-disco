@@ -1,12 +1,42 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Compras</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form>
+            <h:panelGroup id="panelA" layout="block" style="background-color: #28485D; float: left; width:20%; text-align: center; position: fixed; margin-top: 4%;
+                          padding: 1%;">
+                <p:outputLabel value="#{msg.carritocompras}" style="font:bold 1em Arial; color: whitesmoke;"/>
+                <br></br><br></br>
+                <p:dataTable id="dtcompras"  value="#{carritoCompras.listaCarroCompras}" var="com" widgetVar="DTcompras" 
+                             editable="true"
+                             style="font-size: 10px;"
+                             rows="15"
+                             paginator="true"
+                             paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                             emptyMessage="No has agregado canciones al carrito"
+                             filteredValue="#{carritoCompras.cancionFiltro}">
+                    <font></font>
+                    <p:column headerText="#{msg.listacompras}" style=" width: 70%;">
+                        <p:outputLabel  value="#{com.nombrecan}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msg.precio}">
+                        <p:outputLabel value="#{com.precio}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="#{msg.finalizarcom}" actionListener="#{carritoCompras.finalizarCompra}" update="panelA" style="font-size: 10px;"/>
+                <p:commandButton value="#{msg.cancelar}" actionListener="#{carritoCompras.cancelarCompra()}" update="panelA dtcanciones" style="font-size: 10px;"/>
+                <br></br><br></br>
+                <p:outputLabel value="#{ms.valortotal} $#{carritoCompras.valortotal} " style="font-size: 15px; color: whitesmoke;"/>
+
+            </h:panelGroup >
+        </h:form>
     </h:body>
 </html>
 
