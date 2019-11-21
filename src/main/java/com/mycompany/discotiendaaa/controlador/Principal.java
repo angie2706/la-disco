@@ -23,14 +23,14 @@ public class Principal implements Serializable {
     /**
      * Creates a new instance of Principal
      */
-    private String pagina = "/usuario/carritoCompras.xhtml";
+    private String pagina = "/usuario/carritocompras.xhtml";
 
     public Principal() {
         
     }
 
     public void irCarrito() {
-        pagina = "/usuario/carritoCompras.xhtml";
+        pagina = "/usuario/carritocompras.xhtml";
     }
 
     public void irLogin() {
