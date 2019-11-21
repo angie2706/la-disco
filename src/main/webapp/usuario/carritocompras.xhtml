@@ -2,14 +2,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Compras</title>
     </h:head>
     <h:body>
         <h:form>
-            <h:panelGroup id="panelA" layout="block" style="background-color: #28485D; float: left; width:20%; text-align: center; position: fixed; margin-top: 4%;
-                          padding: 1%;">
+            <p:growl id="msgs" showDetail="true"/>                      
+            <h:panelGroup id="panelB" layout="block" >
+                <p:outputLabel value="#{msg.eligecanciones}" style="font:bold 1em Arial; color: blueviolet;"/>
+                <br></br><br></br>
+                <p:dataTable id="dtcanciones" var="canc" value="#{carritoCompras.listaCanciones}" widgetVar="DTcanciones"  
+                             style="width: 95%; margin: auto; font-size: 15px; float: left;"
+                             rows="10"
+                             editable="true"
+                             paginator="true"
+                             paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,15,20" 
+                             emptyMessage="#{msg.emptyMessage}"
+                             filteredValue="#{carritoCompras.cancionFiltro}">
+                    <font></font>
+                    <p:column filterBy="#{canc.nombre_cancion}" headerText="#{msg.cancion}" filterMatchMode="contains">
+                        <p:outputLabel value="#{canc.nombre_cancion}"/>
+                    </p:column><font></font>
+
+                    <p:column filterBy="#{canc.duracion}" headerText="#{msg.duracion}" filterMatchMode="contains">
+                        <p:outputLabel value="#{canc.duracion}"/>
+                    </p:column><font></font>
+
+                    <p:column filterBy="#{canc.nombre_artista}" headerText="#{msg.artista}">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('DTcanciones').filter()" styleClass="custom-filter">
+                                <f:selectItem itemLabel="#{msg.selecciona}" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{carritoComprasControl.nomArtistas}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <p:outputLabel value="#{canc.nombre_artista}"/>
+                    </p:column><font></font>
+
+                    <p:column filterBy="#{canc.nombre_disco}" headerText="#{msg.disco}">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('DTcanciones').filter()" styleClass="custom-filter">
+                                <f:selectItem itemLabel="#{msg.selecciona}" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{carritoCompras.nomDiscos}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <p:outputLabel value="#{canc.nombre_disco}"/>
+                        <br></br>
+                        <img src="#{canc.caratula}" style="width: 50px; height: 50px;"/>
+                    </p:column><font></font>
+
+                    <p:column headerText="#{msg.precio}" style="width: 10%;">
+                        <p:outputLabel value="#{canc.precio}"/>
+                    </p:column><font></font>
+
+                    <p:column headerText="#{msg.elige}" style="width: 8%;">
+                        <p:selectBooleanCheckbox value="#{canc.seleccion}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton icon="ui-icon-cart" action="#{carritoComprasControl.agregarAlCarrito()}" 
+                                 update="panelA dtcanciones msgs" style=" margin-left:-1.5%; position: fixed;">
+                    <p:confirm message="#{msg.mensajecarrito}" header="#{msg.aviso}" icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:confirmDialog global="true">
+                    <p:commandButton value="#{msg.si}" type="Button" icon="ui-icon-check"
+                                     styleClass="ui-confirmdialog-yes"/>
+                    <p:commandButton value="#{msg.no}" type="Button" icon="ui-icon-close"
+                                     styleClass="ui-confirmdialog-no"/>
+                </p:confirmDialog>
+            </h:panelGroup>
+            <br></br><br></br>
+            <h:panelGroup id="panelA" layout="block" style="background-color: #28485D; width:20%; text-align: center; padding: 1%;">
                 <p:outputLabel value="#{msg.carritocompras}" style="font:bold 1em Arial; color: whitesmoke;"/>
                 <br></br><br></br>
                 <p:dataTable id="dtcompras"  value="#{carritoCompras.listaCarroCompras}" var="com" widgetVar="DTcompras" 
@@ -19,11 +84,11 @@
                              paginator="true"
                              paginatorPosition="bottom"
                              paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
-                             emptyMessage="No has agregado canciones al carrito"
+                             emptyMessage="#{msg.emptyMessageCarrito}"
                              filteredValue="#{carritoCompras.cancionFiltro}">
                     <font></font>
                     <p:column headerText="#{msg.listacompras}" style=" width: 70%;">
-                        <p:outputLabel  value="#{com.nombrecan}"/>
+                        <p:outputLabel  value="#{com.nombre_cancion}"/>
                     </p:column>
 
                     <p:column headerText="#{msg.precio}">
