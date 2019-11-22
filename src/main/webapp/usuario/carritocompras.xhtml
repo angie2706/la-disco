@@ -63,7 +63,7 @@
                     </p:column>
                 </p:dataTable>
                 <p:commandButton icon="ui-icon-cart" action="#{carritoCompras.agregarAlCarrito()}" 
-                                 update="panelA dtcanciones msgs" style=" margin-left:-1.5%; position: fixed;">
+                                 update="@form" style=" position: absolute;" >
                     <p:confirm message="#{msg.mensajecarrito}" header="#{msg.aviso}" icon="ui-icon-alert"/>
                 </p:commandButton>
                 <p:confirmDialog global="true">
@@ -98,7 +98,7 @@
                 <p:commandButton value="#{msg.finalizarcom}" actionListener="#{carritoCompras.finalizarCompra}" update="panelA" style="font-size: 10px;"/>
                 <p:commandButton value="#{msg.cancelar}" actionListener="#{carritoCompras.cancelarCompra()}" update="panelA dtcanciones" style="font-size: 10px;"/>
                 <br></br><br></br>
-                <p:outputLabel value="#{ms.valortotal} $#{carritoCompras.valortotal} " style="font-size: 15px; color: whitesmoke;"/>
+                <p:outputLabel value="#{msg.valortotal} $#{carritoCompras.valortotal} " style="font-size: 15px; color: whitesmoke;"/>
 
             </h:panelGroup >
         </h:form>

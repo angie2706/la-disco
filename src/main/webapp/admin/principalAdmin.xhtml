@@ -41,6 +41,7 @@
                         <p:commandButton id="btnArtista" actionListener="#{principalControl.irArtista()}" update="centro" value="#{msg.artista}" style="width: 100%;"/>
                         <p:commandButton id="btnCancion" actionListener="#{principalControl.irCancion()}" update="centro" value="#{msg.cancion}" style="width: 100%;"/>
                         <p:commandButton id="btnDisco" actionListener="#{principalControl.irDisco()}" update="centro" value="#{msg.disco}" style="width: 100%;"/>
+                        <p:commandButton id="btnCerrar" actionListener="#{login.cerrarSesion()}" update="centro" value="#{msg.cerrarsesion}" style="width: 100%;"/>
                         </h:panelGrid>
                     </ui:insert>
                 </div>

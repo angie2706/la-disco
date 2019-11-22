@@ -39,28 +39,44 @@ public class CarritoCompras implements Serializable{
         cancionDB = new CancionDB();
         nomDiscos = new ArrayList();
         nomArtistas = new ArrayList(); 
-        cancionFiltro= new ArrayList();
         listaCarroCompras= new ArrayList();
     }
 
+    @PostConstruct
+    public void init() {
+        llenarListas();
+    }
+    
+    public void llenarListas() {
+        listaCanciones.addAll(comprasDB.consultarCanciones());
+        nomDiscos.addAll(cancionDB.consultarNombreDiscos());
+        nomArtistas.addAll(comprasDB.consultarNombreArtista());
+    }
+    
     public void finalizarCompra() {
 
     }
 
     public void cancelarCompra() {
 
-    }
-
+    }  
+    
     public void agregarAlCarrito() {
         for (Compras c : listaCanciones) {
             if (c.isSeleccion()) {
                 listaCarroCompras.add(c);
             }
         }
+        calcularTotal();
+    }
+    
+    public void calcularTotal(){
+        for(Compras c : listaCarroCompras){
+            valortotal+=c.getPrecio();
+        }
     }
 
-
-public List<Compras> getListaCarroCompras() {
+    public List<Compras> getListaCarroCompras() {
         return listaCarroCompras;
     }
 
@@ -75,7 +91,7 @@ public List<Compras> getListaCarroCompras() {
     public void setListaCanciones(List<Compras> listaCanciones) {
         this.listaCanciones = listaCanciones;
     }
-      
+
     public float getValortotal() {
         return valortotal;
     }
@@ -107,15 +123,23 @@ public List<Compras> getListaCarroCompras() {
     public void setNomDiscos(List<String> nomDiscos) {
         this.nomDiscos = nomDiscos;
     }
-    
-    public void llenarListas() {
-        listaCanciones.addAll(comprasDB.consultarCanciones());
-        nomDiscos.addAll(cancionDB.consultarNombreDiscos());
-        nomArtistas.addAll(comprasDB.consultarNombreArtista());
+
+    public ComprasDB getComprasDB() {
+        return comprasDB;
     }
-    
-    @PostConstruct
-    public void init() {
-        llenarListas();
+
+    public void setComprasDB(ComprasDB comprasDB) {
+        this.comprasDB = comprasDB;
     }
+
+    public CancionDB getCancionDB() {
+        return cancionDB;
+    }
+
+    public void setCancionDB(CancionDB cancionDB) {
+        this.cancionDB = cancionDB;
+    }
+
+
+    
 }

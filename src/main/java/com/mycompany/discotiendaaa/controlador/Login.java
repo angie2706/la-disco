@@ -64,7 +64,12 @@ public class Login implements Serializable {
         }
         return redireccion;
     }
-    
+
+    public String cerrarSesion() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "carritocompras.xhtml";
+    }
+
     public void validarPermiso() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -73,7 +78,7 @@ public class Login implements Serializable {
             if (req.getRequestURI().contains("/admin/")) {
                 if (usuarioLogin == null) {
                     try {
-                        context.getExternalContext().redirect("./../login.xhtml");
+                        context.getExternalContext().redirect("./../usuario/principal.xhtml");
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
