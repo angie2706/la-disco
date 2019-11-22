@@ -32,17 +32,17 @@
                         <p:outputLabel value="#{canc.duracion}"/>
                     </p:column><font></font>
 
-                    <p:column filterBy="#{canc.nombre_artista}" headerText="#{msg.artista}">
+                    <p:column filterBy="#{canc.nombre_artista}" headerText="#{msg.artista}" filterMatchMode="equals" >
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('DTcanciones').filter()" styleClass="custom-filter">
                                 <f:selectItem itemLabel="#{msg.selecciona}" itemValue="#{null}" noSelectionOption="true" />
-                                <f:selectItems value="#{carritoComprasControl.nomArtistas}" />
+                                <f:selectItems value="#{carritoCompras.nomArtistas}" />
                             </p:selectOneMenu>
                         </f:facet>
                         <p:outputLabel value="#{canc.nombre_artista}"/>
                     </p:column><font></font>
 
-                    <p:column filterBy="#{canc.nombre_disco}" headerText="#{msg.disco}">
+                    <p:column filterBy="#{canc.nombre_disco}" headerText="#{msg.disco}" filterMatchMode="equals">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('DTcanciones').filter()" styleClass="custom-filter">
                                 <f:selectItem itemLabel="#{msg.selecciona}" itemValue="#{null}" noSelectionOption="true" />
@@ -62,7 +62,7 @@
                         <p:selectBooleanCheckbox value="#{canc.seleccion}"/>
                     </p:column>
                 </p:dataTable>
-                <p:commandButton icon="ui-icon-cart" action="#{carritoComprasControl.agregarAlCarrito()}" 
+                <p:commandButton icon="ui-icon-cart" action="#{carritoCompras.agregarAlCarrito()}" 
                                  update="panelA dtcanciones msgs" style=" margin-left:-1.5%; position: fixed;">
                     <p:confirm message="#{msg.mensajecarrito}" header="#{msg.aviso}" icon="ui-icon-alert"/>
                 </p:commandButton>

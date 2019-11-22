@@ -7,23 +7,23 @@ package com.mycompany.discotiendaaa.controlador;
 
 import com.mycompany.discotiendaaa.modelo.CancionDB;
 import com.mycompany.discotiendaaa.modelo.ComprasDB;
-import com.mycompany.discotiendaaa.pojo.Cancion;
 import com.mycompany.discotiendaaa.pojo.Compras;
+import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author angie
  */
 @Named(value = "carritoCompras")
-@Dependent
-public class CarritoCompras {
+@SessionScoped
+
+public class CarritoCompras implements Serializable{
+
     private List<Compras> listaCarroCompras;
     private List<Compras> listaCanciones;
     private float valortotal;
@@ -31,30 +31,36 @@ public class CarritoCompras {
     private List<String> nomArtistas;
     private List<String> nomDiscos;
     ComprasDB comprasDB;
-    
-    
-   
-    /**
-     * Creates a new instance of CarritoCompras
-     */
+    CancionDB cancionDB;
+
     public CarritoCompras() {
-        comprasDB= new ComprasDB();
+        comprasDB = new ComprasDB();
         listaCanciones = new ArrayList();
-    }
-    
-    public void finalizarCompra(){
-        
-    }
-    
-    public void cancelarCompra(){
-        
+        cancionDB = new CancionDB();
+        nomDiscos = new ArrayList();
+        nomArtistas = new ArrayList(); 
+        cancionFiltro= new ArrayList();
+        listaCarroCompras= new ArrayList();
     }
 
-    public void agregarAlCarrito(){
-        
+    public void finalizarCompra() {
+
     }
 
-    public List<Compras> getListaCarroCompras() {
+    public void cancelarCompra() {
+
+    }
+
+    public void agregarAlCarrito() {
+        for (Compras c : listaCanciones) {
+            if (c.isSeleccion()) {
+                listaCarroCompras.add(c);
+            }
+        }
+    }
+
+
+public List<Compras> getListaCarroCompras() {
         return listaCarroCompras;
     }
 
@@ -102,13 +108,14 @@ public class CarritoCompras {
         this.nomDiscos = nomDiscos;
     }
     
-    public void llenarListaCanciones() {
+    public void llenarListas() {
         listaCanciones.addAll(comprasDB.consultarCanciones());
+        nomDiscos.addAll(cancionDB.consultarNombreDiscos());
+        nomArtistas.addAll(comprasDB.consultarNombreArtista());
     }
     
     @PostConstruct
     public void init() {
-        llenarListaCanciones();
+        llenarListas();
     }
-
 }

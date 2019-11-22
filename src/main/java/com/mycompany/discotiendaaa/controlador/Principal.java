@@ -5,10 +5,7 @@
  */
 package com.mycompany.discotiendaaa.controlador;
 
-import com.mycompany.discotiendaaa.modelo.CancionDB;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 
